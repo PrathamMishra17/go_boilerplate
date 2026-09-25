@@ -83,5 +83,9 @@ func LoadConfig() (*Config, error) {
 	mainConfig.Observability.ServiceName = "boilerplate"
 	mainConfig.Observability.Environment = mainConfig.Primary.Env
 
+	if err := mainConfig.Observability.Validate(); err != nil {
+		logger.Fatal().Err(err).Msg("invalid observability config")
+	}
+
 	return mainConfig, nil
 }
